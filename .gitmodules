@@ -1,0 +1,6 @@
+[submodule "web-http-client"]
+	path = web-http-client
+	url = https://github.com/gotoiot/web-http-client.git
+[submodule "service-beacons-scanner"]
+	path = service-beacons-scanner
+	url = https://github.com/gotoiot/service-beacons-scanner.git
