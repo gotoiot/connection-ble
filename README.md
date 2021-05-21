@@ -7,9 +7,9 @@ Connection BLE
 
 *Ayudaría mucho si apoyaras este proyecto con una ⭐ en Github!*
 
-Este proyecto es una ecosistema que posee distintas aplicaciones y servicios que conforman una plataforma integral BLE. 
+Este proyecto es un ecosistema que posee aplicaciones y servicios que trabajan en conjunto para formar una plataforma integral BLE. 
 
-Está formado por un servicio que escanea distintas tramas de beacons y que posee una REST HTTP API como interfaz y un cliente web HTTP que sirve para comunicarse con el scanner. Los servicios corren sobre el ecosistema Docker que te permiten ejecutarlos de igual manera en diferentes plataformas. Así mismo es posible conectarse a la plataforma a través de dispositivos externos con BLE, como pueden ser beacons, sistemas embebidos y otros sistemas.
+Está formado por un servicio que escanea distintas tramas de beacons y posee una API REST HTTP como interfaz, y por un cliente web HTTP que sirve para comunicarse con el scanner. Los servicios corren sobre el ecosistema Docker que te permiten ejecutarlos de igual manera en diferentes plataformas. Así mismo es posible conectarse a la plataforma a través de dispositivos externos con BLE, como pueden ser beacons, sistemas embebidos y otros sistemas.
 
 Para que tengas una idea clara, en esta imagen hay un diagrama de como interactuan las partes entre sí.
 
@@ -21,7 +21,7 @@ Para que tengas una idea clara, en esta imagen hay un diagrama de como interactu
 
 Esta sección es una guía con los pasos escenciales para que puedas poner en marcha la aplicación.
 
-<details><summary><b>Mira los pasos necesarios</b></summary><br>
+<details><summary><b>Mira los pasos necesarios</b></summary>
 
 ### Instalar las dependencias
 
@@ -70,7 +70,7 @@ Continuá explorando el proyecto una vez que lo tengas funcionando.
 
 Una vez que la aplicación comienza a ejecutarse es necesario acceder al scanner de beacons a través del cliente HTTP. En esta sección podés ver los detalles al respecto.
 
-<details><summary><b>Lee cómo configurar la aplicación</b></summary><br>
+<details><summary><b>Lee cómo configurar la aplicación</b></summary>
 
 ### Cofiguración del Web HTTP Client
 
@@ -110,19 +110,25 @@ Hay dos formas de funcionamiento para el servicio de scanner de beacons, una es 
 
 **Beacons Simulados**
 
-La manera simulada es muy conveniente para cuando no cuentes con hardware físico que emita beacons. Para estos casos el servicio se encarga en cada ciclo de lectura de simular algunos beacons ordenando de manera aleatoria su RSSI, que es la intensidad de la señal recibida. Con este dato se puede determinar cual es el beacon más cercano. 
+La manera simulada es muy conveniente para cuando no contas con hardware físico que emita beacons. Para estos casos el servicio se encarga en cada ciclo de lectura de simular algunos beacons ordenando de manera aleatoria su RSSI, que es la intensidad de la señal recibida. Con este dato se puede determinar cual es el beacon más cercano. 
 
 Para el caso de probar esta aplicación con beacons simulados no tenés que realizar ninguna acción extra (solo asegurarte que el flag FAKE_SCAN se encuentre en true en la configuración del scanner), por lo que podés continuar con la configuración del scanner mediante el cliente HTTP.
 
 **Beacons reales**
 
-Utilizando hardware físico te podés conectar a Connection BLE de al menos de tres formas: 1) contando con un hardware comercial de beacons como puede ser Estimote o Kontakt 2) ejecutando un proyecto de emisión de beacon en un ESP32 a través del proyecto Embed IoT Core 3) emitiendo beacons desde un hardware externo que tenga BLE integrado, como vimos en las secciones anteriores.
+Utilizando hardware físico te podés conectar a Connection BLE de al menos de tres formas: 1) contando con un hardware comercial de beacons como puede ser Estimote o Kontakt, 2) ejecutando un proyecto de emisión de beacon en un ESP32 a través del proyecto Embed IoT Core, 3) emitiendo beacons desde un sistema Linux que posea hardware BLE integrado. 
+
+Una vez que configures adecuadamente el hardware y que se encuentre emitiendo tramas beacons en un radio cercano al sistema donde corre esta aplicación, es necesario que tengas a mano el UUID que emiten, ya que con este identificador vas a tener que configurar el scanner para leer los beacons cercanos. 
+
+Con el hardware emitiendo beacons y conociendo el UUID podés continuar con la configuración del scanner mediante el cliente HTTP.
 
 **Configuración del scanner mediante el cliente HTTP**
 
 Una vez que cuentes con el hardware emitiendo beacons y se encuentren en un radio cercano al sistema donde estás corriendo esta aplicacion Connection BLE es necesario que configures el UUID_FILTER del scanner de beacons para que pueda leer beacons de ese UUID. Este mecanismo permite que sólo leas los beacons que te interesan. 
 
-Para configurar adecuadamente el UUID_FILTER tenés que enviar desde el cliente HTTP tenés que cargar el valor `http://localhost:5000/ibeacon_scanner/settings` en el campo URL, el valor `PUT` en el campo method y las configuraciones del scanner en el campo body, como por ejemplo `{"uuid_filter", "AA-BB-CC"}` (recordá que el UUID filter debe ser un valo de 16 bytes o 128 bits). El scanner te responderá con la nueva configuración.
+> La configuración del UUID_FILTER es únicamente necesaria si contás con hardware real emitiendo becons. Para el caso de utilizar la simulación de beacons del scanner no hace falta que configures el UUID_FILTER para que funcione. De todas formas podés seguir los pasos para cambiarlo, aunque el scanner va a funcionar de igual forma.
+
+Para configurar adecuadamente el UUID_FILTER tenés que enviar desde el cliente HTTP tenés que cargar el valor `http://localhost:5000/ibeacon_scanner/settings` en el campo URL, el valor `PUT` en el campo method y las configuraciones del scanner en el campo body, como por ejemplo `{"uuid_filter", "001122334455667788"}` (recordá que el UUID filter debe ser un valor de 16 bytes o 128 bits). Presioná el botón `SEND` para mandar el request y el scanner te responderá con la nueva configuración.
 
 Luego tendrás que poner el valor `http://localhost:5000/ibeacon_scanner/beacons_data` en el campo URL, el valor `GET` en method, seleccionar el checkbox `Poll` y poner un valor de `10` en el campo secs, finalmente presioná el botón `SEND`. Esto te permitirá ejecutar requests periódicos al scanner para obtener información de los beacons leídos que podrás ver en la sección de logs.
 
