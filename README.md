@@ -66,11 +66,11 @@ Si pudiste acceder al cliente web significa que la aplicación se encuentra corr
 Continuá explorando el proyecto una vez que lo tengas funcionando.
 
 
-## Configuraciones de funcionamiento 🔩
+## Información principal 🔍
 
-Una vez que la aplicación comienza a ejecutarse es necesario acceder al scanner de beacons a través del cliente HTTP. En esta sección podés ver los detalles al respecto.
+En esta sección vas a encontrar la información para entender y configurar el proyecto.
 
-<details><summary><b>Lee cómo configurar la aplicación</b></summary>
+<details><summary><b>Mira los detalles</b></summary>
 
 ### Cofiguración del Web HTTP Client
 
@@ -126,7 +126,7 @@ Con el hardware emitiendo beacons y conociendo el UUID podés continuar con la c
 
 Una vez que cuentes con el hardware emitiendo beacons y se encuentren en un radio cercano al sistema donde estás corriendo esta aplicacion Connection BLE es necesario que configures el UUID_FILTER del scanner de beacons para que pueda leer beacons de ese UUID. Este mecanismo permite que sólo leas los beacons que te interesan. 
 
-> La configuración del UUID_FILTER es únicamente necesaria si contás con hardware real emitiendo becons. Para el caso de utilizar la simulación de beacons del scanner no hace falta que configures el UUID_FILTER para que funcione. De todas formas podés seguir los pasos para cambiarlo, aunque el scanner va a funcionar de igual forma.
+> La configuración del UUID_FILTER es únicamente necesaria si contás con hardware real emitiendo beacons. Para el caso de utilizar la simulación de beacons del scanner no hace falta que configures el UUID_FILTER para que funcione. De todas formas podés seguir los pasos para cambiarlo, aunque el scanner va a funcionar de igual forma.
 
 Para configurar adecuadamente el UUID_FILTER tenés que enviar desde el cliente HTTP tenés que cargar el valor `http://localhost:5000/ibeacon_scanner/settings` en el campo URL, el valor `PUT` en el campo method y las configuraciones del scanner en el campo body, como por ejemplo `{"uuid_filter", "001122334455667788"}` (recordá que el UUID filter debe ser un valor de 16 bytes o 128 bits). Presioná el botón `SEND` para mandar el request y el scanner te responderá con la nueva configuración.
 
@@ -136,11 +136,11 @@ Con estos pasos realizados vas a poder probar de manera completa una comunicaci�
 
 </details>
 
-## Detalles principales 🔍
+## Información complementaria 📚
 
-En esta sección vas a encontrar las características más relevantes del proyecto.
+En esta sección vas a encontrar información que te va a servir para tener un mayor contexto.
 
-<details><summary><b>Mira los detalles más importantes de la aplicación</b></summary>
+<details><summary><b>Lee esta info</b></summary>
 
 ### BLE & Beacons
 
