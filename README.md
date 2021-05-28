@@ -144,15 +144,11 @@ En esta sección vas a encontrar información que te va a servir para tener un m
 
 ### BLE & Beacons
 
-`Bluetooth` es un protocolo que sirve para crear redes personales de manera inalámbrica en la banda de 2.4 Ghz. `BLE` es la version low energy del protocolo Bluetooth orientada a dispositivos de bajo consumo. Las comunicaciones dentro de BLE pueden realizarse bajo el esquema `central-peripheral` o bien `broadcaster-observer`.
+`Bluetooth` es un protocolo que sirve para crear redes personales de manera inalámbrica en la banda de 2.4 Ghz. `BLE` es la version low energy del protocolo Bluetooth orientada a dispositivos de bajo consumo. Las comunicaciones dentro de BLE pueden realizarse bajo el esquema de `Advertising` o bien a través de `Connections`.
 
-Dentro del tipo broadcaster-observer existe un subtipo de dispositivos que se comunican a través de paquetes `beacons`, emitiendo información periódica que otros dispositivos pueden capturar y reaccionar en consecuencia (observers). Dentro de los beacons existen distintos protocolos de comunicación. Los protocolos `iBeacon` desarrollado por Apple y `Eddystone` desarrollado por Google, son los más dominantes.
+Dentro de las comunicaciones mediante el mecanismo de Advertising de Bluetooth Low Energy existe una implementación denominada `Beacons`, en la que dispositivos emiten periódicamente una señal que contiene información propia que otros dispositivos dentro del rango de cobertura pueden leer y actuar en consecuencia. Dentro de los beacons existen distintos protocolos, los más conocidos son `iBeacon` desarrollado por Apple y `Eddystone` desarrollado por Google, aunque también existen otras implementaciones.
 
-En el artículo [Intro a Bluetooth y BLE](https://www.gotoiot.com/pages/articles/bluetooth_ble_intro/index.html) podés encontrar un panorama general sobre la tecnología y con el artículo [Introducción a Beacons](https://www.gotoiot.com/pages/articles/beacons_intro/index.html) también de nuestra web vas a entender de qué se tratan los beacons.
-
-### El cliente HTTP
-
-El cliente HTTP es una **single-page-application** que se comunica con el scanner através de HTTP. Desde acá podés realizar todas las configuraciones del scanner y también acceder a toda la info de los beacons. Se encuentra en el directorio **web-http-client** y los detalles sobre cómo funciona los podes ver en el [README del proyecto](https://github.com/gotoiot/web-http-client).
+En el artículo [Intro a Bluetooth](https://www.gotoiot.com/pages/articles/bluetooth_intro/index.html) podés encontrar un panorama general sobre la tecnología. En el artículo [Intro a Bluetooth Low Energy](https://www.gotoiot.com/pages/articles/ble_intro/index.html) se encuentran las características más representativas de BLE y en el artículo [Introducción a Beacons](https://www.gotoiot.com/pages/articles/beacons_intro/index.html) vas a entender de qué se tratan los beacons.
 
 ### Ejecución de servicios
 
