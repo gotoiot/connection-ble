@@ -5,16 +5,12 @@ services:
     build:
       context:    ./service-beacons-scanner
       dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
     env_file:
       - ./service-beacons-scanner/env
     volumes:
       - ./service-beacons-scanner/_service_storage:/app/_service_storage
     expose:
       - "5000"
-    ports:
-      - "5000:5000"
     network_mode: host
     cap_add:
       - NET_ADMIN
